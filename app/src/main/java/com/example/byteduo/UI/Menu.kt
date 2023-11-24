@@ -7,6 +7,11 @@ import android.view.inputmethod.InputMethodManager
 
 import android.widget.EditText
 import android.widget.ListView
+import com.example.byteduo.Bakery
+import com.example.byteduo.Drinks
+import com.example.byteduo.HotCoffee
+import com.example.byteduo.HotTeas
+import com.example.byteduo.IceTeas
 import com.example.byteduo.R
 import com.example.byteduo.adapter.MenuAdapter
 import com.example.byteduo.model.MenuItem
@@ -15,6 +20,14 @@ class Menu : AppCompatActivity() {
 
     private lateinit var menuListView: ListView
     private lateinit var menuAdapter: MenuAdapter
+
+    private val menuItems = listOf("Hot Coffee","Ice Teas","Hot Teas", "Bakery", "Drinks")
+    private val fragments = listOf(
+        HotCoffee(),
+        IceTeas(),
+        HotTeas(),
+        Bakery(),
+        Drinks())
 
     //creating initial menu items
     private val menuItemsList = mutableListOf<MenuItem>()
@@ -45,17 +58,14 @@ class Menu : AppCompatActivity() {
         setContentView(R.layout.activity_menu)
 
 
-        //get the search input
-        val editText = findViewById<EditText>(R.id.txtSearch)
-
         //get the list input
         menuListView = findViewById(R.id.menuListView)
 
         // Get menu items from a resource (replace with your own list)
-        val menuItems = resources.getStringArray(R.array.menu_items)
+        //val menuItems = resources.getStringArray(R.array.menu_items)
 
         // Create adapter and set it to the ListView
-        menuAdapter = MenuAdapter(this, menuItems.toList())
+        menuAdapter = MenuAdapter(this, menuItems)
         menuListView.adapter = menuAdapter
 
         // Set the initial selected position
@@ -65,13 +75,20 @@ class Menu : AppCompatActivity() {
         // Set up item click listener to handle item selection
         menuListView.setOnItemClickListener { _, _, position, _ ->
 
-            menuAdapter.setSelectedPosition(position)
+            onMenuItemClicked(position)
         }
 
+        // Display the default fragment (e.g., Hot Teas) when the activity starts
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, fragments[2])
+                .commit()
+
+
+        //get the search input
+        val editText = findViewById<EditText>(R.id.txtSearch)
 
 
         //the search bar
-
         // Set an OnClickListener to enable focus when clicked
         editText.setOnClickListener {
             editText.isFocusableInTouchMode = true
@@ -80,5 +97,14 @@ class Menu : AppCompatActivity() {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
         }
+
+    }
+    private fun onMenuItemClicked(position: Int) {
+        // Replace the fragment container with the selected fragment
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragments[position])
+            .commit()
+
+        menuAdapter.setSelectedPosition(position)
     }
 }

@@ -42,8 +42,6 @@ class MenuAdapter(private val context: Menu, private val items: List<String>): B
         textView.text = bulletedText
         textView.textSize = 15f
 
-
-
         // Change text color based on selection
         if (position == selectedPosition) {
             textView.setTextColor(Color.WHITE)
@@ -51,9 +49,7 @@ class MenuAdapter(private val context: Menu, private val items: List<String>): B
             textView.setTextColor(Color.BLACK)
         }
 
-
         textView.rotation = -90f  // Text oriented upwards
-
 
         val params = LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT,

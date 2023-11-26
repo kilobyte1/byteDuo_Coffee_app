@@ -56,13 +56,12 @@
         android:id="@+id/txtUserName"
         android:layout_width="74dp"
         android:layout_height="22dp"
-        android:layout_marginTop="98dp"
+        android:layout_marginTop="96dp"
         android:fontFamily="@font/architects_daughter"
-        android:text="Name"
         android:textColor="#432817"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.365"
+        app:layout_constraintHorizontal_bias="0.359"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

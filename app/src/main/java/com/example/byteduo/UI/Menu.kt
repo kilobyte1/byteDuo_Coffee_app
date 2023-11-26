@@ -7,6 +7,7 @@ import android.view.inputmethod.InputMethodManager
 
 import android.widget.EditText
 import android.widget.ListView
+import android.widget.TextView
 import com.example.byteduo.Bakery
 import com.example.byteduo.Drinks
 import com.example.byteduo.HotCoffee
@@ -14,7 +15,13 @@ import com.example.byteduo.HotTeas
 import com.example.byteduo.IceTeas
 import com.example.byteduo.R
 import com.example.byteduo.adapter.MenuAdapter
+import com.example.byteduo.model.Customer
 import com.example.byteduo.model.MenuItem
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class Menu : AppCompatActivity() {
 
@@ -29,34 +36,12 @@ class Menu : AppCompatActivity() {
         Bakery(),
         Drinks())
 
-    //creating initial menu items
-    private val menuItemsList = mutableListOf<MenuItem>()
-
-
-    private val initialMenuItems = listOf(
-        MenuItem(
-            itemId = 1,
-            itemName = "Black Coffee",
-            itemPicture = "url_to_black_coffee_image",
-            itemIngredients = listOf("Coffee"),
-            itemPrice = 2.99,
-            category = "Hot Coffee"
-        ),
-        MenuItem(
-            itemId = 2,
-            itemName = "Latte",
-            itemPicture = "url_to_latte_image",
-            itemIngredients = listOf("Espresso", "Steamed Milk"),
-            itemPrice = 3.99,
-            category = "Hot Coffee"
-        )
-    )
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
+        //user name
+        val userName = findViewById<TextView>(R.id.txtUserName)
 
         //get the list input
         menuListView = findViewById(R.id.menuListView)
@@ -97,6 +82,33 @@ class Menu : AppCompatActivity() {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
         }
+
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+
+        if (userId != null) {
+            val database = FirebaseDatabase.getInstance().reference
+            val customerReference = database.child("customers").child(userId)
+
+            customerReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        val customer = snapshot.getValue(Customer::class.java)
+                        if (customer != null) {
+                            runOnUiThread {
+                                val name = customer.cusUsername ?: "Unknown User"
+                                userName.text = name
+                            }
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // I will handle the error
+                }
+            })
+        }
+
+
 
     }
     private fun onMenuItemClicked(position: Int) {

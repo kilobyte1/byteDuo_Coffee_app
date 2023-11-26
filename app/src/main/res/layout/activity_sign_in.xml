@@ -68,7 +68,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnNext"
+        android:id="@+id/btnLogin"
         android:layout_width="162dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -76,9 +76,9 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_btn"
         android:foreground="?attr/selectableItemBackground"
-        android:text="Next"
+        android:text="Login"
         android:textColor="#FFFFFF"
-        android:textSize="24dp" />
+        android:textSize="18dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"

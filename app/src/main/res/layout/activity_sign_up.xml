@@ -38,7 +38,7 @@
         app:hintTextColor="@color/black"
         >
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etFirstName"
+            android:id="@+id/etFullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -61,7 +61,7 @@
         app:hintTextColor="@color/black"
         >
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etLastName"
+            android:id="@+id/etUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -130,8 +130,29 @@
         />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilConfirmPassword"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Confirm Password"
+        android:textColorHint="#D4AF37"
+        android:background="@drawable/stroke"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="1dp"
+        app:hintTextColor="@color/black"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="@color/black"/>
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
-        android:id="@+id/btnNext"
+        android:id="@+id/btnRegister"
         android:layout_width="138dp"
         android:layout_height="36dp"
         android:layout_gravity="center"
@@ -139,9 +160,9 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_btn"
         android:foreground="?attr/selectableItemBackground"
-        android:text="Next"
+        android:text="Register"
         android:textColor="#FFFFFF"
-        android:textSize="24dp" />
+        android:textSize="18dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"

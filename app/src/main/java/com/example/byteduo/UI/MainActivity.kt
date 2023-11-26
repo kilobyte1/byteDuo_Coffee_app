@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
 
         val btnGetStarted = findViewById<Button>(R.id.btnGetStarted)
 
-
         btnGetStarted.setOnClickListener() {
             //animate the button on create
 

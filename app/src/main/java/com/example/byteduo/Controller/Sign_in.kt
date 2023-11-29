@@ -1,11 +1,10 @@
-package com.example.byteduo.UI
+package com.example.byteduo.Controller
 
 import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
@@ -15,6 +14,10 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class Sign_in : AppCompatActivity() {
 
@@ -82,8 +85,7 @@ class Sign_in : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val user = mAuth.currentUser
                         if (user != null) {
-                            val intent = Intent(this, Menu::class.java)
-                            startActivity(intent)
+                            checkUserRoleAndRedirect(user.uid)
                         }
                     } else {
                         val errorMessage = when (task.exception) {
@@ -102,7 +104,44 @@ class Sign_in : AppCompatActivity() {
         }
 
 
-
-
     }
+
+    private fun checkUserRoleAndRedirect(userId: String?) {
+        val customersRef = FirebaseDatabase.getInstance().getReference("customers")
+
+        if (userId != null) {
+            customersRef.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        val userRole = snapshot.child("role").getValue(String::class.java)
+
+                        if (!userRole.isNullOrEmpty() && (userRole == "admin" || userRole == "customer")) {
+                            // Redirect based on the role
+                            val intent = if (userRole == "admin") {
+                                Intent(this@Sign_in,  AdminMenu::class.java)
+                            } else {
+                                Intent(this@Sign_in, CustomerMenu::class.java)
+                            }
+                            startActivity(intent)
+                        } else {
+                            // Log or display a message for unexpected role values
+                            Log.e("UserRole", "Unexpected user role: $userRole")
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle the error case
+                    Toast.makeText(
+                        this@Sign_in,
+                        "Error retrieving user role: ${error.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
+        }
+    }
+
+
+
 }

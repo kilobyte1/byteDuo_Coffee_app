@@ -6,12 +6,11 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.example.byteduo.UI.Menu
-
+import androidx.fragment.app.FragmentActivity
 
 
 // MenuItemAdapter.kt
-class MenuAdapter(private val context: Menu, private val items: List<String>): BaseAdapter() {
+class MenuAdapter(private val context: FragmentActivity, private val items: List<String>): BaseAdapter() {
 
     private var selectedPosition = -1
 

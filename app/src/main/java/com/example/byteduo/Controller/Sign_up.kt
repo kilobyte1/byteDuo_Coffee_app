@@ -1,4 +1,4 @@
-package com.example.byteduo.UI
+package com.example.byteduo.Controller
 
 import android.app.Dialog
 import android.content.Intent
@@ -15,10 +15,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.byteduo.R
 import com.example.byteduo.model.Customer
-import com.google.android.gms.tasks.Task
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import java.lang.Exception
@@ -173,31 +171,21 @@ class Sign_up : AppCompatActivity() {
                     mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                // Registration successful
-                                Toast.makeText(this, "Successfully created", Toast.LENGTH_SHORT)
+                                // Registration successful //make a toast
+                                Toast.makeText(this, "Account successfully created", Toast.LENGTH_SHORT)
                                     .show()
 
                                 val user = mAuth.currentUser
                                 if (user != null) {
 
                                     Log.d(
-                                        "SignUpActivity",
-                                        "Values: $fullName, $email, $mobile, $username, $password"
-                                    )
+                                        "SignUpActivity", "Values: $fullName, $email, $mobile, $username, $password, customer")
                                     // Save user data to the database
-                                    saveCustomerDataToDatabase(
-                                        user.uid,
-                                        fullName,
-                                        email,
-                                        mobile,
-                                        username,
-                                        password,
-                                        true
-                                    )
+                                    saveCustomerDataToDatabase(user.uid, fullName, email, mobile, username, password, "customer",true)
                                 }
 
                                 // Redirect to activity
-                                val intent = Intent(this, Menu::class.java)
+                                val intent = Intent(this, CustomerMenu::class.java)
                                 startActivity(intent)
                             } else {
                                 // Registration failed
@@ -223,6 +211,9 @@ class Sign_up : AppCompatActivity() {
 
     }
 
+
+
+
     //fun to animate next button
     private fun applyShadowAnimation(view: View) {
         // Animate the button with a shadow effect
@@ -238,14 +229,16 @@ class Sign_up : AppCompatActivity() {
     }
 
     private fun saveCustomerDataToDatabase(userId: String, cusFullName: String?, cusEmail: String?, cusPhoneNo: String?,
-                                           cusUsername: String?, cusPassword: String?, cusIsActive: Boolean) {
+                                           cusUsername: String?, cusPassword: String?, role: String?, cusIsActive: Boolean) {
         val database = FirebaseDatabase.getInstance().reference
         val customerReference = database.child("customers").child(userId)
 
         Log.d("SignUpActivity", "Saving data to database for user: $userId")
-        val customer = Customer(cusFullName, cusEmail, cusPhoneNo, cusUsername, cusPassword, cusIsActive)
+        val customer = Customer(cusFullName, cusEmail, cusPhoneNo, cusUsername, cusPassword, role, cusIsActive)
         Log.d("SignUpActivity", "Customer object: $customer")
         customerReference.setValue(customer)
     }
+
+
 
 }

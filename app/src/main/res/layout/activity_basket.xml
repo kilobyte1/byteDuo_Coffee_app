@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DEC3A9"
-    tools:context=".UI.Basket" >
+    tools:context=".Controller.Basket" >
 
     <TextView
         android:id="@+id/textView5"

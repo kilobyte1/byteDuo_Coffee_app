@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DEC3A9"
-    tools:context=".UI.Menu">
+    tools:context=".AdminHomeFragment">
 
     <TextView
         android:id="@+id/textView4"
@@ -65,136 +65,78 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="85dp"
-        android:layout_height="651dp"
+        android:layout_height="0dp"
         android:background="@drawable/left_toolbar"
         android:orientation="vertical"
         android:paddingTop="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentContainer"
         app:layout_constraintEnd_toStartOf="@+id/textView4"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtSearch"
+        app:layout_constraintTop_toTopOf="@+id/fragmentContainer"
         app:layout_constraintVertical_bias="0.9">
 
-        <!-- Your existing ListView -->
+
         <ListView
             android:id="@+id/menuListView"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
+            android:layout_height="match_parent"
             android:background="@drawable/left_toolbar" />
-
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="69dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="@drawable/lowerthird"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintVertical_bias="1.0">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="71dp"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="100dp"
-            tools:layout_editor_absoluteY="641dp">
-
-
-            <LinearLayout
-                android:layout_width="81dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/imageButton6"
-                    android:layout_width="36dp"
-                    android:layout_height="41dp"
-                    android:src="@drawable/home"
-                    android:background="#00FFFDFD"
-                    android:scaleType="fitCenter"
-                    tools:layout_editor_absoluteX="190dp"
-                    tools:layout_editor_absoluteY="393dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="22dp"
-                    android:text="Home" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="56dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/imageButton5"
-                    android:layout_width="36dp"
-                    android:layout_height="41dp"
-                    android:src="@drawable/acct"
-                    android:background="#00FFFDFD"
-                    android:scaleType="fitCenter"
-                    tools:layout_editor_absoluteX="190dp"
-                    tools:layout_editor_absoluteY="393dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Account" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="67dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/imageButton7"
-                    android:layout_width="36dp"
-                    android:layout_height="41dp"
-                    android:src="@drawable/order"
-                    android:background="#00FFFDFD"
-                    android:scaleType="fitCenter"
-                    tools:layout_editor_absoluteX="190dp"
-                    tools:layout_editor_absoluteY="393dp" />
-
-                <TextView
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:text="Order"
-                    android:textAlignment="center" />
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-    </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="0dp"
-        android:layout_height="490dp"
+        android:layout_height="0dp"
         android:background="#f55555"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/txtSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSearch" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Add Button -->
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="Add" />
+
+            <!-- Edit Button -->
+
+            <!-- Delete Button -->
+            <Button
+                android:id="@+id/btnEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="Edit" />
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+
+
 
     <ImageView
         android:id="@+id/imageView"

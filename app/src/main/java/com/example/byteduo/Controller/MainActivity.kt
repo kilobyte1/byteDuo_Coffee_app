@@ -1,4 +1,4 @@
-package com.example.byteduo.UI
+package com.example.byteduo.Controller
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

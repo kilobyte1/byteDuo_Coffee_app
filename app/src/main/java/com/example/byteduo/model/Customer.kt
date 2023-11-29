@@ -6,5 +6,6 @@ data class Customer(
     val cusPhoneNo: String? = null,
     val cusUsername: String? = null,
     val cusPassword: String? = null,
+    val role: String?="customer",
     val cusIsActive: Boolean = false
 )

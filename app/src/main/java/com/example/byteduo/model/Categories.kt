@@ -9,12 +9,7 @@ class Categories {
     }
 
     // Remove an item from the menu
-    fun removeItem(itemId: Long) {
-        val itemToRemove = menuItems.find { it.itemId == itemId }
-        itemToRemove?.let {
-            menuItems.remove(it)
-        }
-    }
+
 
     // Get the entire menu
     fun getMenu(): List<MenuItem> {

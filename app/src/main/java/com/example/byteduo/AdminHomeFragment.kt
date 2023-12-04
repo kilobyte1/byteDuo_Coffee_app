@@ -11,12 +11,11 @@ import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
 import com.example.byteduo.adapter.MenuAdapter
-import com.example.byteduo.fragment.Bakery
-import com.example.byteduo.fragment.CusHomeFragment
-import com.example.byteduo.fragment.Drinks
-import com.example.byteduo.fragment.HotCoffee
-import com.example.byteduo.fragment.HotTeas
-import com.example.byteduo.fragment.IceTeas
+import com.example.byteduo.View.Bakery
+import com.example.byteduo.View.Drinks
+import com.example.byteduo.View.HotCoffee
+import com.example.byteduo.View.HotTeas
+import com.example.byteduo.View.IceTeas
 import com.example.byteduo.model.Customer
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot

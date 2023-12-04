@@ -1,4 +1,4 @@
-package com.example.byteduo.fragment
+package com.example.byteduo.View
 
 import android.content.Context
 import android.os.Bundle
